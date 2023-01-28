@@ -5,6 +5,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <title>Instagram - Clone Coding</title>
     <style>
         @import url('css/default.css');
@@ -23,24 +26,25 @@
             margin-right: 10px;
 
             border-radius: 8px;
-            border:0.5px solid lightgray;
+            border: 0.5px solid lightgray;
             /* padding: 20px; */
             font-size: 13px;
+            padding-bottom: 20px;
         }
 
-        .profile{
+        .profile {
             justify-content: space-between;
             width: 100%;
             padding: 15px;
             box-sizing: border-box;
         }
 
-        .profile>p{
+        .profile>p {
             margin-left: 18px;
             margin-right: auto;
         }
 
-        .profile>p>span:first-child{
+        .profile>p>span:first-child {
             font-weight: bold;
             margin-bottom: 5px;
             margin-right: auto;
@@ -66,7 +70,7 @@
         .account-content>li>a {
             color: skyblue;
             font-size: 13px;
-            
+
         }
 
         .account-content>li>p {
@@ -100,37 +104,111 @@
         }
 
 
-        .about{
+        .about {
             margin-top: 30px;
             margin-bottom: 30px;
         }
+
         .about>a {
             color: lightgray;
             font-size: 11px;
             margin-right: 2px;
         }
-        .name{
+
+        .name {
             color: lightgray;
             font-size: 11px;
             margin-right: auto;
         }
 
-        .imgs >div>img{
+        .imgs>div>img {
             width: 100%;
 
         }
 
-        .icons{
-            width: 97%;
+        .feed-icons {
+            width: 92%;
+            margin-top: 5px;
+            margin-bottom: 5px;
         }
-        .icons>img:last-child{
+
+        .feed-icons>img {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .feed-icons>img:last-child {
             margin-left: auto;
         }
-        .likes{
+
+        .likes {
             width: 95%;
             margin-right: auto;
+            margin-left: 20px;
+            font-weight: bold;
+            margin-top: 5px;
+            margin-bottom: 5px;
+
+        }
+
+        .comments {
+            width: 92%;
+            margin-top: 5px;
+        }
+
+        .comments>span.title {
+            font-weight: bold;
+        }
+
+        .comments>span.hashtag {
+            color: darkblue;
+        }
+
+        .count {
+            margin-right: auto;
+            margin-left: 20px;
+            color: lightgray;
+
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .times {
+            margin-right: auto;
+            margin-left: 20px;
+            font-size: 12px;
+            color: lightgray;
+        }
+
+        .swiper {
+            width: 470px;
+        }
+
+        .swiper-button-prev, .swiper-button-next{
+            width:25px;
+            color: #fefefe;
+            border-radius: 50%;
+        }
+        .swiper-button-prev::after, .swiper-button-next::after{
+            width:25px;
+            color: #fefefe;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: bold;
         }
     </style>
+    <script>
+        let is_like = true;
+        function like() {
+            if(is_like == true) {
+                $('#heart').attr('src','image/icons/12.png');
+                is_like = false;
+            } else{
+                $('#heart').attr('src','image/icons/5.png');
+                is_like = true;
+            }
+
+        }
+    </script>
 
 </head>
 
@@ -161,18 +239,22 @@
                     <img width="32" src="image/profile/1.png">
                 </div>
                 <p class="flex-col">
-                    <span>Apple</span>
+                    <span>Aldi Nugroho</span>
                     <span>Kampar, Riau</span>
                 </p>
                 <img width="20px" src="image/icons/7.png">
             </div>
-            <div class="imgs">
-                <div>
-                    <img src="image/post/1.png">
+            <div class="imgs swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"> <img src="image/post/1.png"></div>
+                    <div class="swiper-slide"> <img src="image/post/2.png"></div>
                 </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
             </div>
-            <div class="icons flex-row">
-                <img src="image/icons/5.png">
+            <div class="feed-icons flex-row">
+                <img id='heart' onclick='like()' src="image/icons/5.png">
                 <img src="image/icons/9.png">
                 <img src="image/icons/2.png">
                 <img src="image/icons/10.png">
@@ -181,13 +263,15 @@
                 1.000k
             </div>
             <div class="comments">
-
+                <span class="title">Aldi Nugroho</span>
+                "Good news"
+                <span class="hashtag">#Apple_Good_News</span>
             </div>
             <div class="count">
-
+                View All 9.000 comments
             </div>
             <div class="times">
-
+                20 HOURS AGO
             </div>
         </div>
         <div class="account flex-col">
@@ -197,8 +281,8 @@
                         <img width="56" src="image/icons/6.png">
                     </div>
                     <p class="flex-col">
-                        <span>Sparta Coding</span>
-                        <span>Sparta</span>
+                        <span>Aldi Nugroho</span>
+                        <span>H8rgunid</span>
                     </p>
                     <a href="#">switch</a>
                 </li>
@@ -211,8 +295,8 @@
                         <img width="56" src="image/follower/1.png">
                     </div>
                     <p class="flex-col">
-                        <span>Sparta Coding</span>
-                        <span>Sparta</span>
+                        <span>Windows</span>
+                        <span>W11</span>
                     </p>
                     <a href="#">Follow</a>
                 </li>
@@ -221,8 +305,8 @@
                         <img width="56" src="image/follower/2.png">
                     </div>
                     <p class="flex-col">
-                        <span>Sparta Coding</span>
-                        <span>Sparta</span>
+                        <span>John Taslim</span>
+                        <span>Tasjo</span>
                     </p>
                     <a href="#">Follow</a>
                 </li>
@@ -231,8 +315,8 @@
                         <img width="56" src="image/follower/3.png">
                     </div>
                     <p class="flex-col">
-                        <span>Sparta Coding</span>
-                        <span>Sparta</span>
+                        <span>Raise Berker Coding</span>
+                        <span>Raisbe</span>
                     </p>
                     <a href="#">Follow</a>
                 </li>
@@ -241,8 +325,8 @@
                         <img width="56" src="image/follower/4.png">
                     </div>
                     <p class="flex-col">
-                        <span>Sparta Coding</span>
-                        <span>Sparta</span>
+                        <span>Sandra Mungkir</span>
+                        <span>Mungkir</span>
                     </p>
                     <a href="#">Follow</a>
                 </li>
@@ -251,8 +335,8 @@
                         <img width="56" src="image/follower/5.png">
                     </div>
                     <p class="flex-col">
-                        <span>Sparta Coding</span>
-                        <span>Sparta</span>
+                        <span>Hey Udin Isin</span>
+                        <span>HUI</span>
                     </p>
                     <a href="#">Follow</a>
                 </li>
@@ -275,6 +359,25 @@
         </div>
 
     </div>
+    <script>
+        const swiper = new Swiper('.swiper', {
+            // Optional parameters
+            direction: 'horizontal',
+            loop: true,
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+        });
+    </script>
 </body>
 
 </html>
